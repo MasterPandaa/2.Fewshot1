@@ -1,6 +1,7 @@
-import pygame
 import random
 import sys
+
+import pygame
 
 # ----------------------------
 # Konfigurasi dasar
@@ -68,12 +69,21 @@ def draw_score(screen, font, score):
 def game_over_screen(screen, big_font, small_font, score):
     screen.fill(BLACK)
     msg = big_font.render("Game Over!", True, RED)
-    sub = small_font.render("Tekan R untuk main lagi, atau Q untuk keluar.", True, WHITE)
+    sub = small_font.render(
+        "Tekan R untuk main lagi, atau Q untuk keluar.", True, WHITE
+    )
     score_txt = small_font.render(f"Skor Anda: {score}", True, WHITE)
 
-    screen.blit(msg, (SCREEN_WIDTH // 2 - msg.get_width() // 2, SCREEN_HEIGHT // 2 - 80))
-    screen.blit(score_txt, (SCREEN_WIDTH // 2 - score_txt.get_width() // 2, SCREEN_HEIGHT // 2 - 20))
-    screen.blit(sub, (SCREEN_WIDTH // 2 - sub.get_width() // 2, SCREEN_HEIGHT // 2 + 30))
+    screen.blit(
+        msg, (SCREEN_WIDTH // 2 - msg.get_width() // 2, SCREEN_HEIGHT // 2 - 80)
+    )
+    screen.blit(
+        score_txt,
+        (SCREEN_WIDTH // 2 - score_txt.get_width() // 2, SCREEN_HEIGHT // 2 - 20),
+    )
+    screen.blit(
+        sub, (SCREEN_WIDTH // 2 - sub.get_width() // 2, SCREEN_HEIGHT // 2 + 30)
+    )
     pygame.display.flip()
 
     # Tunggu input R (restart) atau Q (quit)
@@ -157,7 +167,8 @@ def run_game():
             or new_head[1] >= SCREEN_HEIGHT
         ):
             game_over_screen(screen, big_font, small_font, score)
-            return  # keluar dari run_game agar main loop (restart) bisa memanggil lagi
+            # keluar dari run_game agar main loop (restart) bisa memanggil lagi
+            return
 
         # 2b) Deteksi tabrakan dengan tubuh sendiri (kecuali ekor jika bergerak tanpa makan)
         if new_head in snake[:-1]:
